@@ -9,6 +9,9 @@ import OwnerDashboard from "./pages/OwnerDashboard";
 import CreateTurf from "./pages/CreateTurf";
 import MyTurfs from "./pages/MyTurfs";
 import OwnerBookings from "./pages/OwnerBookings";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Profile from "./pages/Profile";
 
 const appRouter = createBrowserRouter([
   {
@@ -18,6 +21,7 @@ const appRouter = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <SignUp /> },
+      { path: "/profile", element: <Profile /> },
 
       { path: "/turfs/:turfId", element: <TurfDetails /> },
       { path: "/my-bookings", element: <MyBookings /> },
@@ -31,7 +35,11 @@ const appRouter = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={appRouter} />;
+  return (
+    <Provider store={appStore}>
+      <RouterProvider router={appRouter} />
+    </Provider>
+  );
 }
 
 export default App;
