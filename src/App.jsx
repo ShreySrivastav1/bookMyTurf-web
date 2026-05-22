@@ -13,6 +13,7 @@ import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import Profile from "./pages/Profile";
 import BookNow from "./pages/BookNow";
+import EditTurf from "./pages/EditTurf";
 
 const appRouter = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ const appRouter = createBrowserRouter([
 
       { path: "/owner/dashboard", element: <OwnerDashboard /> },
       { path: "/owner/turf/create", element: <CreateTurf /> },
+      { path: "/turf/edit/:turfId", element: <EditTurf /> },
       { path: "/owner/turfs", element: <MyTurfs /> },
       { path: "/owner/bookings", element: <OwnerBookings /> },
     ],

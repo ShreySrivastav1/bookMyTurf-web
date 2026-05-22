@@ -10,8 +10,8 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = async() => {
-    try{
+  const handleLogout = async () => {
+    try {
       await axios.post(
         BASE_URL + "/logout",
         {},
@@ -22,7 +22,7 @@ const NavBar = () => {
 
       return navigate("/login");
 
-    }catch(err){
+    } catch (err) {
       console.error(err);
     }
   }
@@ -90,9 +90,24 @@ const NavBar = () => {
                 <li>
                   <a onClick={handleLogout}>Logout</a>
                 </li>
+
+                {user?.role === "owner" && (<li>
+                  <Link to="/owner/turf/create">
+                    Create Turf
+                  </Link>
+                </li>)}
+
+                {user?.role === "owner" && (<li>
+                  <Link to="/owner/turfs">
+                    My Turfs
+                  </Link>
+                </li>)}
+
+
               </ul>
             </div>
           )}
+
 
         </div>
       </div>
