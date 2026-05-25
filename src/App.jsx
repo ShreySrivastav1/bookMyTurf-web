@@ -14,6 +14,7 @@ import appStore from "./utils/appStore";
 import Profile from "./pages/Profile";
 import BookNow from "./pages/BookNow";
 import EditTurf from "./pages/EditTurf";
+import Payment from "./pages/Payment";
 
 const appRouter = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ const appRouter = createBrowserRouter([
       { path: "/my-bookings", element: <MyBookings /> },
 
       { path: "/booking/:turfId", element: <BookNow /> },
+      { path: "/payment", element: <Payment /> },
 
       { path: "/owner/dashboard", element: <OwnerDashboard /> },
       { path: "/owner/turf/create", element: <CreateTurf /> },

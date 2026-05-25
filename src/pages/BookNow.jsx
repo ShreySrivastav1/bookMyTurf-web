@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
+import { useSelector } from "react-redux";
+
 
 const getTodayDate = () => {
   return new Date().toISOString().split("T")[0];
@@ -9,6 +11,10 @@ const getTodayDate = () => {
 
 const BookNow = () => {
   const { turfId } = useParams();
+
+  const user = useSelector((store) => store.user);
+  const navigate = useNavigate();
+
 
   const [selectedDate, setSelectedDate] = useState(getTodayDate());
   const [slots, setSlots] = useState([]);
@@ -32,6 +38,46 @@ const BookNow = () => {
   useEffect(() => {
     fetchSlots();
   }, [selectedDate, turfId]);
+
+  const handleBooking = async () => {
+
+    //no slot selected
+    if (!selectedSlot) {
+      return alert("Please select a slot!");
+    }
+
+    //not logged in
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const res = await axios.post(BASE_URL + "/booking", {
+        turfId,
+        bookingDate: selectedDate,
+        startTime: selectedSlot.startTime,
+        endTime: selectedSlot.endTime,
+      }, { withCredentials: true });
+
+      console.log(res.data);
+
+      navigate("/payment", {
+        state: {
+          booking: res.data.data,
+        },
+      });
+
+    } catch (err) {
+      console.error(err);
+
+      alert(
+        err?.response?.data?.message ||
+        "Unable to create booking"
+      );
+
+    }
+  }
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -68,11 +114,10 @@ const BookNow = () => {
             <button
               key={slot.startTime}
               onClick={() => setSelectedSlot(slot)}
-              className={`btn ${
-                selectedSlot?.startTime === slot.startTime
-                  ? "btn-primary"
-                  : "btn-outline"
-              }`}
+              className={`btn ${selectedSlot?.startTime === slot.startTime
+                ? "btn-primary"
+                : "btn-outline"
+                }`}
             >
               {slot.startTime} - {slot.endTime}
             </button>
@@ -89,7 +134,9 @@ const BookNow = () => {
             </span>
           </p>
 
-          <button className="btn btn-success mt-4">
+          <button
+            onClick={handleBooking}
+            className="btn btn-success mt-4">
             Confirm Booking
           </button>
         </div>

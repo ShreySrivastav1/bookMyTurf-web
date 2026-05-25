@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { removeTurfs } from "../utils/turfSlice";
+import { useState } from "react";
 
 const TurfCard = ({ turf, ownerView }) => {
 
@@ -39,8 +40,13 @@ const TurfCard = ({ turf, ownerView }) => {
         "https://images.unsplash.com/photo-1522778119026-d647f0596c20b?q=80&w=1200";
 
     const deleteTurf = async () => {
+        const confirmed = window.confirm(
+            "Are you sure you want to delete this turf?"
+        );
+
+        if (!confirmed) return;
         try {
-            const res = await axios.delete(BASE_URL + "/turf/delete/" + turf._id,
+            await axios.delete(BASE_URL + "/turf/delete/" + turf._id,
                 { withCredentials: true });
             dispatch(removeTurfs(turf._id));
             showMessage("Turf deleted successfully!", "success");
@@ -55,7 +61,7 @@ const TurfCard = ({ turf, ownerView }) => {
     }
 
     return (
-        <div className="flex flex-col lg:flex-row justify-center items-start gap-8 my-10 mb-32 px-4">
+        <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition duration-300">
             {showToast && (
                 <div className="toast toast-top toast-center z-50">
                     <div
@@ -66,7 +72,7 @@ const TurfCard = ({ turf, ownerView }) => {
                     </div>
                 </div>
             )}
-            <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition duration-300">
+            
                 <figure className="h-52">
                     <img
                         src={imageUrl}
@@ -141,9 +147,9 @@ const TurfCard = ({ turf, ownerView }) => {
                     </div>
 
                 </div>
-            </div>
+            
         </div>
-            );
+    );
 };
 
-            export default TurfCard;
+export default TurfCard;

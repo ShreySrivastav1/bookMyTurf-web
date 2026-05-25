@@ -55,31 +55,21 @@ const NavBar = () => {
 
           {/* IF USER LOGGED IN */}
           {user && (
-            <div className="dropdown dropdown-end flex items-center">
+            <div className="dropdown dropdown-end relative flex items-center">
+              <p className="px-2">Welcome, {user.firstName}</p>
 
-              <p className="px-2">
-                Welcome, {user.firstName}
-              </p>
-
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle avatar"
-              >
+              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
                   <img
                     alt="user photo"
-                    src={
-                      user.photoUrl ||
-                      "https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG.png"
-                    }
+                    src={user.photoUrl || "https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG.png"}
                   />
                 </div>
               </div>
 
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                className="menu menu-sm dropdown-content absolute top-full right-0 bg-base-100 rounded-box z-[999] mt-3 w-52 p-2 shadow"
               >
                 <li>
                   <Link to="/profile">
