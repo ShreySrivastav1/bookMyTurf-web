@@ -15,6 +15,7 @@ import Profile from "./pages/Profile";
 import BookNow from "./pages/BookNow";
 import EditTurf from "./pages/EditTurf";
 import Payment from "./pages/Payment";
+import BookingConfirmed from "./pages/BookingConfirmed";
 
 const appRouter = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ const appRouter = createBrowserRouter([
 
       { path: "/booking/:turfId", element: <BookNow /> },
       { path: "/payment", element: <Payment /> },
+      { path: "/booking-confirmed", element: <BookingConfirmed /> },
 
       { path: "/owner/dashboard", element: <OwnerDashboard /> },
       { path: "/owner/turf/create", element: <CreateTurf /> },

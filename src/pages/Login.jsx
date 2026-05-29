@@ -102,6 +102,7 @@ const Login = () => {
                                     <div className="justify-center card-actions">
                                         <button className="btn btn-primary" onClick={handleLogin}>Login</button>
                                     </div>
+                                    <p className="" onClick={() => navigate("/signup")}>New user? SignUp now!</p>
                                 </div>
                             </div>
                         </div>

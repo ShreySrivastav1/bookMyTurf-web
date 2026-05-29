@@ -78,18 +78,32 @@ const NavBar = () => {
                 </li>
 
                 <li>
+                  <Link to="/my-bookings">
+                    My Bookings
+                  </Link>
+                </li>
+
+                <li>
                   <a onClick={handleLogout}>Logout</a>
                 </li>
 
-                {user?.role === "owner" && (<li>
-                  <Link to="/owner/turf/create">
-                    Create Turf
-                  </Link>
-                </li>)}
+                {user?.role === "owner" && (
+                  <li>
+                    <Link to="/owner/turf/create">
+                      Create Turf
+                    </Link>
+                  </li>
+                )}
 
                 {user?.role === "owner" && (<li>
                   <Link to="/owner/turfs">
                     My Turfs
+                  </Link>
+                </li>)}
+
+                {user?.role === "owner" && (<li>
+                  <Link to="/owner/bookings">
+                    Your Bookings
                   </Link>
                 </li>)}
 
